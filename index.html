@@ -40,7 +40,7 @@
                     </select>
                 </div>
                 <!-- Botón Entrar al Turno -->
-                <button type="submit" class="bg-black text-pink-400 px-4 py-2 rounded w-full">Entrar al Turno</button>
+                <button type="submit" class="bg-black text-pink-400 px-4 py-2 rounded w-full border border-pink-400">Entrar al Turno</button>
             </form>
         </div>
     </div>
@@ -62,31 +62,31 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <!-- Comestibles -->
                 <div>
-                    <h2 class="text-2xl font-semibold text-pink-400 mb-4 bg-black p-2 rounded text-center">Comestibles</h2>
+                    <h2 class="text-2xl font-semibold text-pink-400 mb-4 bg-black p-2 rounded text-center border border-pink-400">Comestibles</h2>
                     <div id="comestibles" class="grid gap-4"></div>
                 </div>
 
                 <!-- Bebestibles -->
                 <div>
-                    <h2 class="text-2xl font-semibold text-pink-400 mb-4 bg-black p-2 rounded text-center">Bebestibles</h2>
+                    <h2 class="text-2xl font-semibold text-pink-400 mb-4 bg-black p-2 rounded text-center border border-pink-400">Bebestibles</h2>
                     <div id="bebestibles" class="grid gap-4"></div>
                 </div>
 
                 <!-- Cajas -->
                 <div>
-                    <h2 class="text-2xl font-semibold text-pink-400 mb-4 bg-black p-2 rounded text-center">Cajas</h2>
+                    <h2 class="text-2xl font-semibold text-pink-400 mb-4 bg-black p-2 rounded text-center border border-pink-400">Cajas</h2>
                     <div id="cajas" class="grid gap-4"></div>
                 </div>
 
                 <!-- Carrito -->
                 <div>
-                    <h2 class="text-2xl font-semibold text-pink-400 mb-4 bg-black p-2 rounded text-center">Carrito</h2>
+                    <h2 class="text-2xl font-semibold text-pink-400 mb-4 bg-black p-2 rounded text-center border border-pink-400">Carrito</h2>
                     <div class="bg-black text-pink-400 shadow-lg rounded-lg p-6">
                         <div id="cart-items" class="space-y-4"></div>
                         <p class="text-lg bg-black text-pink-400 p-2 rounded">Total: $<span id="cart-total">0</span></p>
                         <div class="space-y-2 mt-4">
                             <!-- Botón Registrar Venta -->
-                            <button id="register-sale" class="bg-black text-pink-400 px-4 py-2 rounded w-full">Registrar Venta</button>
+                            <button id="register-sale" class="bg-black text-pink-400 px-4 py-2 rounded w-full border border-pink-400">Registrar Venta</button>
                             <button id="clear-cart" class="bg-gray-600 text-white px-4 py-2 rounded w-full">Vaciar Carrito</button>
                             <button id="close-turno" class="bg-red-600 text-white px-4 py-2 rounded w-full">Cerrar Turno</button>
                         </div>
@@ -216,7 +216,7 @@
         function generateProducts() {
             productos.forEach(product => {
                 const div = document.createElement("div");
-                div.className = "bg-black text-pink-400 shadow-lg rounded-lg p-4 flex items-center";
+                div.className = "bg-black text-pink-400 shadow-lg rounded-lg p-4 flex items-center border border-pink-400";
                 div.innerHTML = `
                     <img src="${product.imagen}" alt="${product.nombre}" class="w-12 h-12 mr-4">
                     <div class="flex-1">
