@@ -23,18 +23,32 @@
 <body class="bg-opacity-90">
     <!-- Sección de Inicio de Turno -->
     <div id="inicio-turno">
-        <div class="bg-black text-pink-400 text-center py-4">
-            <h1 class="text-3xl font-bold">Inicio de Turno Wiwang</h1>
+        <div class="bg-gradient-to-r from-cyan-500 via-blue-500 to-pink-500 py-4 rounded-b-lg shadow-lg border-b-4 border-cyan-400 mb-6">
+            <div class="max-w-2xl mx-auto px-4 bg-black/60 rounded">
+                <h1 class="text-3xl md:text-4xl font-extrabold text-white drop-shadow-lg tracking-wide uppercase animate-pulse text-center py-2">
+                    Inicio de Turno <span class="text-pink-300">Wiwang</span>
+                </h1>
+            </div>
         </div>
         <div class="flex items-center justify-center min-h-screen py-8">
-            <form id="turno-form" class="bg-white shadow-lg rounded-lg p-6 max-w-md w-full">
+            <form id="turno-form" class="bg-black text-pink-400 shadow-lg rounded-lg p-6 max-w-md w-full border border-pink-400">
                 <div class="mb-4">
                     <label for="mesero-nombre" class="block text-lg font-semibold">Nombre del Mesero:</label>
-                    <input type="text" id="mesero-nombre" class="border border-gray-300 rounded w-full px-3 py-2" placeholder="Ingresa tu nombre" required>
+                    <input
+                        type="text"
+                        id="mesero-nombre"
+                        class="border border-pink-400 rounded w-full px-3 py-2 bg-black text-pink-400 placeholder-pink-300 focus:outline-none focus:ring-2 focus:ring-pink-400"
+                        placeholder="Ingresa tu nombre"
+                        required
+                    >
                 </div>
                 <div class="mb-4">
                     <label for="mesero-rango" class="block text-lg font-semibold">Rango:</label>
-                    <select id="mesero-rango" class="border border-gray-300 rounded w-full px-3 py-2" required>
+                    <select
+                        id="mesero-rango"
+                        class="border border-pink-400 rounded w-full px-3 py-2 bg-black text-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-400"
+                        required
+                    >
                         <option value="">Selecciona un rango</option>
                         <option value="Bartender">Bartender</option>
                     </select>
@@ -47,9 +61,14 @@
 
     <!-- Sección de Calculadora -->
     <div id="calculadora" class="hidden">
-        <!-- Título con franja roja -->
-        <div class="bg-black text-pink-400 text-center py-4">
-            <h1 class="text-3xl font-bold">Calculadora Wiwang</h1>
+        <!-- Título con franja  -->
+        >
+        <div class="bg-gradient-to-r from-cyan-500 via-blue-500 to-pink-500 py-4 rounded-b-lg shadow-lg border-b-4 border-cyan-400 mb-6">
+            <div class="max-w-2xl mx-auto px-4 bg-black/60 rounded">
+                <h1 class="text-4xl font-extrabold text-white drop-shadow-lg tracking-wide uppercase animate-pulse text-center py-2">
+                    Calculadora <span class="text-pink-300">Wiwang</span>
+                </h1>
+            </div>
         </div>
 
         <!-- Notificaciones -->
@@ -87,15 +106,15 @@
                         <div class="space-y-2 mt-4">
                             <!-- Botón Registrar Venta -->
                             <button id="register-sale" class="bg-black text-pink-400 px-4 py-2 rounded w-full border border-pink-400">Registrar Venta</button>
-                            <button id="clear-cart" class="bg-gray-600 text-white px-4 py-2 rounded w-full">Vaciar Carrito</button>
-                            <button id="close-turno" class="bg-red-600 text-white px-4 py-2 rounded w-full">Cerrar Turno</button>
+                            <button id="clear-cart" class="bg-black text-white px-4 py-2 rounded w-full border border-pink-400">Vaciar Carrito</button>
+                            <button id="close-turno" class="bg-black text-red-500 px-4 py-2 rounded w-full border border-pink-400">Cerrar Turno</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
+    <p id="miElemento" class="text-pink-400 text-center mt-2"></p>
     <script>
         const turnoForm = document.getElementById("turno-form");
         const calculadoraSection = document.getElementById("calculadora");
@@ -152,6 +171,16 @@
             salesHistory.push([...cart]);
             localStorage.setItem("salesHistory", JSON.stringify(salesHistory));
             showNotification("Venta registrada con éxito.");
+
+            // Guardar tiempo en servicio
+            const turno = JSON.parse(localStorage.getItem("mesero"));
+            if (turno) {
+                const ahora = new Date();
+                const entrada = new Date(turno.entrada);
+                const tiempoMs = ahora - entrada;
+                localStorage.setItem("tiempoServicio", tiempoMs);
+            }
+
             cart = [];
             updateCart();
         });
@@ -210,7 +239,7 @@
             { id: 12, tipo: "bebestible", nombre: "Leche de plátano sin Alcohol", precio: 1000, imagen: "Leche de plátano.png" },
             { id: 13, tipo: "Caja ", nombre: "Caja 3 x 3", precio: 5000, imagen: "Caja.png" },
             { id: 14, tipo: "Caja ", nombre: "Caja 12 x 12", precio: 20000, imagen: "Caja.png" },
-            { id: 15, tipo: "Caja ", nombre: "Caja Marvel (6x6) + Coleccionable ", precio: 15000, imagen: "Caja.png" }
+            { id: 15, tipo: "Caja ", nombre: "Caja Miku (4x4x4) + Coleccionable ", precio: 15000, imagen: "BOLSA.png" }
         ];
 
         function generateProducts() {
@@ -223,12 +252,12 @@
                         <p class="text-xl font-bold">${product.nombre}</p>
                         <p class="text-lg text-pink-200">Precio: $${product.precio}</p>
                         <div class="flex items-center space-x-4 mt-2">
-                            <button class="bg-gray-300 px-2 py-1 rounded decrease">-</button>
-                            <input type="number" value="1" min="1" class="quantity-input border rounded w-12 text-center" />
-                            <button class="bg-gray-300 px-2 py-1 rounded increase">+</button>
+                            <button class="bg-black text-pink-400 px-2 py-1 rounded border border-pink-400 decrease">-</button>
+                            <input type="number" value="1" min="1" class="quantity-input bg-black text-pink-400 border border-pink-400 rounded w-12 text-center" />
+                            <button class="bg-black text-pink-400 px-2 py-1 rounded border border-pink-400 increase">+</button>
                         </div>
                     </div>
-                    <button class="bg-red-600 text-white px-4 py-2 rounded ml-4 add-to-cart">Añadir</button>
+                    <button class="bg-black text-white px-4 py-2 rounded ml-4 border border-pink-400 add-to-cart">Añadir</button>
                 `;
 
                 const quantityInput = div.querySelector(".quantity-input");
@@ -264,6 +293,32 @@
                 cart.push({ ...product, cantidad });
             }
             updateCart();
+        }
+
+        const tiempoServicio = localStorage.getItem("tiempoServicio");
+        if (tiempoServicio) {
+            const horas = Math.floor(tiempoServicio / 3600000);
+            const minutos = Math.floor((tiempoServicio % 3600000) / 60000);
+            // Muestra donde quieras, por ejemplo:
+            // document.getElementById("miElemento").textContent = `Tiempo en servicio: ${horas}h ${minutos}m`;
+        }
+
+        // Actualiza y guarda el tiempo en servicio en tiempo real si hay turno activo
+        const turnoActivo = JSON.parse(localStorage.getItem("mesero"));
+        if (turnoActivo) {
+            function actualizarTiempoServicio() {
+                const entrada = new Date(turnoActivo.entrada);
+                const ahora = new Date();
+                const tiempoMs = ahora - entrada;
+                localStorage.setItem("tiempoServicio", tiempoMs);
+
+                // (Opcional) Mostrar en pantalla:
+                // const horas = Math.floor(tiempoMs / 3600000);
+                // const minutos = Math.floor((tiempoMs % 3600000) / 60000);
+                // document.getElementById("miElemento").textContent = `Tiempo en servicio: ${horas}h ${minutos}m`;
+            }
+            actualizarTiempoServicio();
+            setInterval(actualizarTiempoServicio, 60000); // Actualiza cada minuto
         }
     </script>
 </body>
